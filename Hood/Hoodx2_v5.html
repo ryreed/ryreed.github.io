@@ -1,0 +1,1200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ryan Reed - Mt. Hood for Armchair Climbers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Oswald:wght@400;500&family=Lora:ital,wght@0,400;1,400&family=Cinzel:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --white: #ffffff;
+        --off-white: #f9f9f9;
+        --light-gray: #f0f0f0;
+        --mid-gray: #888;
+        --dark: #222;
+        --border: #ddd;
+        --salmon: #c8614a;
+        --menu-bg: #888888;
+        /* keep route colors */
+        --gold: #a07830;
+        --red: #e84040;
+        --orange: #f07820;
+        --green: #4caf6a;
+        --pink: #e060b0;
+        --dot-size: 10px;
+      }
+
+      html,
+      body {
+        width: 100%;
+        min-height: 100vh;
+        background: var(--white);
+        color: var(--dark);
+        font-family: "Lora", Georgia, serif;
+        overflow-x: hidden;
+      }
+
+      /* ── Site Header (matches parent) ── */
+      .site-header {
+        background: var(--white);
+        padding: 1.5rem 2rem 0;
+      }
+      .header-top {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        padding-bottom: 0.4rem;
+      }
+      .hamburger-wrap {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0;
+      }
+      .bars {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .bars span {
+        display: block;
+        width: 26px;
+        height: 2.5px;
+        background: var(--dark);
+        transition: all 0.3s ease;
+        transform-origin: center;
+      }
+      .hamburger-wrap.open .bars span:nth-child(1) {
+        transform: translateY(7.5px) rotate(45deg);
+      }
+      .hamburger-wrap.open .bars span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger-wrap.open .bars span:nth-child(3) {
+        transform: translateY(-7.5px) rotate(-45deg);
+      }
+      .menu-label {
+        font-family: "Oswald", sans-serif;
+        font-size: 0.85rem;
+        font-weight: 400;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--dark);
+      }
+      .site-title {
+        font-family: "Alfa Slab One", serif;
+        font-size: clamp(2rem, 7vw, 3.5rem);
+        font-weight: 400;
+        color: var(--salmon);
+        letter-spacing: 0.1em;
+        text-align: center;
+        line-height: 1.1;
+        text-decoration: none;
+        display: block;
+      }
+      .site-tagline {
+        text-align: center;
+        font-family: "Oswald", sans-serif;
+        font-size: 1.12rem;
+        font-weight: 400;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--mid-gray);
+        padding: 0.8rem 0 1.2rem;
+      }
+      .header-rule {
+        border: none;
+        border-top: 1px solid var(--border);
+      }
+
+      /* ── Dropdown Nav ── */
+      .nav-menu {
+        background: var(--menu-bg);
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.35s ease;
+      }
+      .nav-menu.open {
+        max-height: 56px;
+      }
+      .nav-menu-inner {
+        display: flex;
+        align-items: center;
+        padding: 0 2rem;
+        height: 52px;
+      }
+      .nav-menu a {
+        font-family: "Oswald", sans-serif;
+        font-size: 0.78rem;
+        font-weight: 400;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #fff;
+        text-decoration: none;
+        padding: 0 1.4rem;
+        height: 52px;
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        transition: background 0.2s;
+      }
+      .nav-menu a:hover {
+        background: rgba(0, 0, 0, 0.15);
+      }
+      @media (max-width: 680px) {
+        .nav-menu.open {
+          max-height: 220px;
+        }
+        .nav-menu-inner {
+          flex-direction: column;
+          height: auto;
+          padding: 0;
+        }
+        .nav-menu a {
+          width: 100%;
+          padding: 0 2rem;
+          height: 50px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+      }
+
+      /* ── Page title block ── */
+      .page-heading {
+        text-align: center;
+        padding: 2.5rem 1rem 1.4rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .page-heading h1 {
+        font-family: "Cinzel", serif;
+        font-size: clamp(1.4rem, 4vw, 2.1rem);
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        color: var(--dark);
+        text-transform: uppercase;
+      }
+      .page-heading p.sub {
+        font-size: 1rem;
+        color: var(--mid-gray);
+        letter-spacing: 0.12em;
+        margin-top: 0.4rem;
+        font-style: italic;
+        font-family: "Lora", serif;
+      }
+
+      /* ── Legend ── */
+      .legend {
+        display: inline-flex;
+        flex-wrap: wrap;
+        justify-content: left;
+        gap: 1.2rem 1.5rem;
+        padding: 1.2rem 1rem;
+        background: var(--light-gray);
+        border-bottom: 1px solid var(--border);
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        font-size: 0.88rem;
+        letter-spacing: 0.08em;
+        color: var(--dark);
+        text-transform: uppercase;
+        font-family: "Cinzel", serif;
+        font-weight: 400;
+      }
+      .legend-line {
+        width: 30px;
+        height: 3px;
+        border-radius: 2px;
+      }
+
+      /* ── Map container ── */
+      .map-wrap {
+        display: flex;
+        justify-content: left;
+        align-items: flex-start;
+        padding: 2rem 1rem 0rem;
+        gap: 1.5rem;
+      }
+      .map-inner {
+        position: relative;
+        display: inline-block;
+        line-height: 0;
+        flex-shrink: 0;
+        /* Shadow is on the img only, so it starts below the legend */
+      }
+      .map-inner img {
+        display: block;
+        height: auto;
+        max-width: min(650px, 100vw - 2rem);
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+      }
+      @media (max-width: 899px) {
+        .map-inner img {
+          max-width: min(800px, 100vw - 2rem);
+        }
+      }
+
+      /* Legend lives inside map-inner so it's glued to the image and
+         unaffected by hoverbox height. Width matches image automatically. */
+      .map-inner .legend {
+        display: flex;
+        width: 100%;
+        line-height: normal;
+      }
+
+      /* ── Hoverbox panel (desktop: sidebar to the right of map) ── */
+      .hoverbox-panel {
+        display: none; /* hidden on mobile */
+        flex-shrink: 0;
+        width: 500px;
+        align-self: flex-start;
+      }
+      @media (min-width: 900px) {
+        .hoverbox-panel {
+          display: grid;
+          grid-template-columns: 1fr;
+        }
+        /* Stack hoverbox and default box in the same grid cell */
+        .hoverbox-panel > * {
+          grid-column: 1;
+          grid-row: 1;
+        }
+        /* On desktop, hoverbox fills its grid cell */
+        .hoverbox-panel .hoverbox {
+          position: relative;
+          width: 100%;
+          transform: none !important;
+          align-self: start;
+        }
+        .hoverbox-panel .hoverbox.visible {
+          transform: none !important;
+        }
+      }
+
+      /* ── Hotspot dots ── */
+      .hotspot {
+        position: absolute;
+        width: var(--dot-size);
+        height: var(--dot-size);
+        border-radius: 50%;
+        background: #ff3a3a;
+        border: 1.5px solid #fff;
+        box-shadow:
+          0 0 0 3px rgba(255, 58, 58, 0.45),
+          0 2px 8px rgba(0, 0, 0, 0.6);
+        transform: translate(-50%, -50%);
+        cursor: pointer;
+        z-index: 10;
+        transition:
+          transform 0.18s,
+          box-shadow 0.18s;
+      }
+      .hotspot:hover,
+      .hotspot:focus {
+        transform: translate(-50%, -50%) scale(0.8);
+        box-shadow:
+          0 0 0 5px rgba(255, 58, 58, 0.55),
+          0 4px 10px rgba(0, 0, 0, 0.7);
+        outline: none;
+      }
+      /* pulse ring */
+      .hotspot::after {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        border-radius: 20%;
+        border: 2px solid rgba(255, 100, 100, 0.5);
+        animation: pulse 2.4s ease-out infinite;
+      }
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          opacity: 0.7;
+        }
+        70% {
+          transform: scale(2.2);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(2.2);
+          opacity: 0;
+        }
+      }
+
+      /* ── Hoverbox ── */
+      .hoverbox {
+        z-index: 100;
+        width: 100%;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+        pointer-events: none;
+        opacity: 0;
+        transition:
+          opacity 0.82s ease,
+          transform 0.82s ease;
+        overflow: hidden;
+      }
+      /* Mobile: absolute overlay on map */
+      @media (max-width: 899px) {
+        .hoverbox {
+          position: absolute;
+          width: 600px;
+          max-width: calc(100vw - 2rem);
+          transform: translateY(8px) scale(0.97);
+        }
+        .hoverbox.visible {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+          pointer-events: auto;
+        }
+      }
+      /* Desktop: static in panel */
+      @media (min-width: 900px) {
+        .hoverbox {
+          position: static;
+          transform: none;
+        }
+        .hoverbox.visible {
+          opacity: 1;
+          pointer-events: auto;
+        }
+      }
+
+      .hb-img-wrap {
+        display: block;
+        width: 100%;
+        line-height: 0;
+      }
+      .hoverbox-img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .hoverbox-img-placeholder {
+        width: 100%;
+        height: 160px;
+        background: var(--light-gray);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--mid-gray);
+        font-family: "Cinzel", serif;
+        font-size: 0.9rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        line-height: normal;
+      }
+      .hoverbox-body {
+        padding: 1.4rem 1.6rem 1.6rem;
+      }
+      .hoverbox-route {
+        font-family: "Cinzel", serif;
+        font-size: 0.75rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 0.4rem;
+      }
+      .hoverbox-name {
+        font-family: "Cinzel", serif;
+        font-size: 1.45rem;
+        font-weight: 600;
+        color: var(--dark);
+        line-height: 1.3;
+        margin-bottom: 0.25rem;
+      }
+      .hoverbox-elev {
+        font-size: 1.05rem;
+        color: var(--mid-gray);
+        font-style: italic;
+        margin-bottom: 0.9rem;
+        letter-spacing: 0.05em;
+      }
+      .hoverbox-divider {
+        height: 1px;
+        background: rgba(160, 120, 48, 0.25);
+        margin-bottom: 0.9rem;
+      }
+      .hoverbox-desc {
+        font-size: 1rem;
+        line-height: 1.7;
+        color: #444;
+        font-weight: 400;
+        font-family: "Lora", serif;
+      }
+
+      /* ── Default panel box (shown when no hoverbox is active) ── */
+      .panel-default {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        padding: 1.6rem 1.8rem 1.8rem;
+        opacity: 1;
+        transition: opacity 0.5s ease;
+      }
+      .panel-default.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .panel-default-label {
+        font-family: "Cinzel", serif;
+        font-size: 0.75rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 0.5rem;
+      }
+      .panel-default-title {
+        font-family: "Cinzel", serif;
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--dark);
+        line-height: 1.3;
+        margin-bottom: 0.6rem;
+      }
+      .panel-default-divider {
+        height: 1px;
+        background: var(--border);
+        margin-bottom: 0.9rem;
+      }
+      .panel-default-body {
+        font-size: 1rem;
+        line-height: 1.75;
+        color: #555;
+        font-family: "Lora", serif;
+      }
+
+      /* ── Footer ── */
+      footer {
+        text-align: center;
+        padding: 2rem 1rem;
+        color: var(--mid-gray);
+        font-size: 0.78rem;
+        letter-spacing: 0.1em;
+        font-family: "Cinzel", serif;
+        border-top: 1px solid var(--border);
+      }
+
+      /* Tooltip hint */
+      .hint {
+        text-align: center;
+        padding: 0.6rem;
+        font-size: 0.82rem;
+        letter-spacing: 0.08em;
+        color: var(--mid-gray);
+        font-style: italic;
+        font-family: "Lora", serif;
+        margin-top: -1.5rem;
+        margin-bottom: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- SITE HEADER -->
+    <header class="site-header">
+      <div class="header-top">
+        <button
+          class="hamburger-wrap"
+          id="hamburger"
+          aria-label="Toggle navigation menu"
+        >
+          <div class="bars"><span></span><span></span><span></span></div>
+          <span class="menu-label">Menu</span>
+        </button>
+        <a href="../index.html" class="site-title">RYAN REED</a>
+      </div>
+      <p class="site-tagline">
+        Writer.&nbsp;&nbsp;&nbsp;Tech Writer.&nbsp;&nbsp;&nbsp;Climber.
+      </p>
+      <hr class="header-rule" />
+    </header>
+
+    <!-- DROPDOWN NAV -->
+    <nav class="nav-menu" id="navMenu" aria-label="Main navigation">
+      <div class="nav-menu-inner">
+        <a href="#">Editorial Work</a>
+        <a href="#">Tech Writing</a>
+        <a href="#">Mt. Hood Demo Site</a>
+        <a href="#">Climbing Blog</a>
+      </div>
+    </nav>
+
+    <!-- PAGE TITLE -->
+    <div class="page-heading">
+      <h1>An Armchair Guide to Climbing Mt. Hood</h1>
+      <p class="sub">Timberline Approaches</p>
+    </div>
+    <div class="map-wrap" id="mapWrap1">
+      <div class="map-inner" id="mapInner">
+        <img
+          id="mapImg"
+          src="images/IMG_9625_aV5.jpg"
+          alt="Mt. Hood South Side Routes annotated photo"
+        />
+
+        <!-- ─────────────────────────────────────────
+         HOTSPOTS — positions computed from pixel analysis of the annotated photo
+         Image: 2000 × 1244 px
+    ───────────────────────────────────────── -->
+
+        <!-- Dot 1 · Summit  -->
+        <div
+          class="hotspot"
+          style="left: 72%; top: 14.7%"
+          data-id="1"
+          tabindex="0"
+          data-route="All Routes"
+          data-name="Summit"
+          data-elev="11,249 ft / 3,429 m"
+          data-desc="The highest point in Oregon. The rounded flat summit can accommodate dozens of climbers. On clear days you'll see at least six volcanoes. Celebrate--but keep in mind you're only halfway done."
+          data-img="images/IMG_6678_35.jpeg"
+        ></div>
+
+        <!-- Dot 2 · Old Chute -->
+        <!--
+        <div
+          class="hotspot"
+          style="left: 54.27%; top: 13.12%"
+          data-id="2"
+          tabindex="0"
+          data-route="South Side Route"
+          data-name="Old Chute"
+          data-elev="11,100 ft / 3,383 m"
+          data-desc="The most popular path to the summit ridge, the Old Chute can be a romp in soft snow or a difficult ascent when icy. Often crowded on nice spring days. Either way, it steepens toward the ridge and can scare beginners with huge exposure."
+          data-img="images/IMG_8753.jpeg"
+        ></div>
+-->
+        <!-- Dot 3 · West Crater Wall -->
+
+        <!--
+        <div
+          class="hotspot"
+          style="left: 52.56%; top: 27.15%"
+          data-id="3"
+          tabindex="0"
+          data-route="West Crater Rim Route"
+          data-name="West Crater Wall"
+          data-elev="10,980 ft / 3,347 m"
+          data-desc=""
+          data-img="images/IMG_1806_35.jpeg"
+        ></div>
+        -->
+
+        <!-- Dot 4 · Hogsback -->
+        <!--
+        <div
+          class="hotspot"
+          style="left: 55.25%; top: 29.81%"
+          data-id="4"
+          tabindex="0"
+          data-route="South Side Route"
+          data-name="Hogsback"
+          data-elev="11,050 ft / 3,368 m"
+          data-desc="The low spot of this wind-sculpted geometric arc is a lovely perch before the final push to the summit. The arc steepens as it rises, then is abruptly sliced by a deep bergschrund just before the towers."
+          data-img="images/IMG_0085.jpeg"
+        ></div>
+-->
+
+        <!-- Dot 5 · Devil's Kitchen -->
+        <div
+          class="hotspot"
+          style="left: 65.79%; top: 24%"
+          data-id="5"
+          tabindex="0"
+          data-route="South Side Route"
+          data-name="Devil's Kitchen"
+          data-elev="10,700 ft / 3,261 m"
+          data-desc="After four hours of cimbing ever steeper snow slopes, the abrupt level ground here is a welcome sight. But the stench of sulfurous fumes rising from huge fumaroles is a reminder this is dangerous ground. Follow boot tracks or probe for holes."
+          data-img="images/IMG_9403.jpeg"
+        ></div>
+
+        <!-- Dot 6 · Crater Rock base -->
+        <!--
+        <div
+          class="hotspot"
+          style="left: 47.72%; top: 33.39%"
+          data-id="6"
+          tabindex="0"
+          data-route="Main Southside Route"
+          data-name="Crater Rock Base"
+          data-elev="10,400 ft / 3,170 m"
+          data-desc="Crater Rock is the prominent volcanic plug that divides the upper South Side. The standard route passes to the right (east) while the orange West Crater Rim variant wraps left. Sulfurous fumaroles near the base provide faint warmth on cold mornings. Route-finding here is critical in whiteout conditions."
+          data-img=""
+        ></div>
+        -->
+
+        <!-- Dot 7 · Wy'east Ridge -->
+        <div
+          class="hotspot"
+          style="left: 83.58%; top: 25.35%"
+          data-id="7"
+          tabindex="0"
+          data-route="Wy'east &amp; Newton-Clark Routes"
+          data-name="Wy'east Ridge"
+          data-elev="9,700 ft / 2,957 m"
+          data-desc="Just before the Wy'east Ridge the canyon wall steepens as you climb loose rock and ice. If you're not alons"
+          data-img="images/IMG_2427.jpeg"
+        ></div>
+
+        <!-- Dot 8 · Triangle Moraine -->
+        <div
+          class="hotspot"
+          style="left: 59.68%; top: 29%"
+          data-id="8"
+          tabindex="0"
+          data-route="South Side Route"
+          data-name="Top of Triangle Moraine"
+          data-elev="9,600 ft / 2,926 m"
+          data-desc="Triangle Moraine tops out in a small flat area along the ridge halfway between the Palmer lift and Devils Kitchen. You're level with Illumination Rock, and approaching Crater Rock above. You're likely smelling sulfer fumes."
+          data-img="images/IMG_3010.jpeg"
+        ></div>
+
+        <!-- Dot 9 · White River Glacier (green route) -->
+        <div
+          class="hotspot"
+          style="left: 72.55%; top: 33.88%"
+          data-id="9"
+          tabindex="0"
+          data-route="Wy'east &amp; Newton-Clark Routes"
+          data-name="White River Glacier"
+          data-elev="8,900 ft / 2,713 m"
+          data-desc="Traversing from Palmer into the White River canyon takes you onto a shrinking glacier that still boasts several large crevasses. Continue up to the East Crater Rim and Newton-Clark routes."
+          data-img="images/IMG_2241_35.jpeg"
+        ></div>
+
+        <!-- Dot 10 · Top of Palmer -->
+        <div
+          class="hotspot"
+          style="left: 46.08%; top: 38.73%"
+          data-id="10"
+          tabindex="0"
+          data-route="South Side Route"
+          data-name="Top of the Palmer Lift"
+          data-elev="8,540 ft / 2,603 m"
+          data-desc="You've trudged up snowcat tracks in the dark for two hours. The mountain begins to feel wilder: no lifts, no grooming, no snowcats. This is where crampons usually go on. It gets a bit more serious."
+          data-img="images/IMG_9843.jpeg"
+        ></div>
+
+        <!-- Dot 11 · Illumination Saddle  -->
+        <div
+          class="hotspot"
+          style="left: 25.72%; top: 40.03%"
+          data-id="11"
+          tabindex="0"
+          data-route="West Side Routes"
+          data-name="Illumination Saddle"
+          data-elev="9,300 ft / 2,835 m"
+          data-desc="Illumination Saddle, one of the only spots to camp on the South Side, is the portal to the more serious west side routes: Reid Glacier Headwall, Leuthold Couloir, Sandy Headwall. Ropes go on for glacier travel."
+          data-img="images/IMG_2898.jpeg"
+        ></div>
+
+        <!-- Dot 14 · Silcox waypoint -->
+        <div
+          class="hotspot"
+          style="left: 30.07%; top: 54.12%"
+          data-id="14"
+          tabindex="0"
+          data-route="South Side Route"
+          data-name="Magic Mile / Silcox Hut"
+          data-elev="6,200 ft / 1,890 m"
+          data-desc="The Silcox Hut and the upper terminal of the Magic Mile chairlift are the first waypoints. Congratulations, you've completed about 1/8th of the mountain."
+          data-img="images/IMG_6196_35.jpeg"
+        ></div>
+
+        <!-- Dot 15 · Timberline Lodge trailhead -->
+        <div
+          class="hotspot"
+          style="left: 28.79%; top: 85.8%"
+          data-id="15"
+          tabindex="0"
+          data-route="South Side Route"
+          data-name="Timberline"
+          data-elev="5,970 ft / 1,820 m"
+          data-desc="The usual starting point for South Side ascents of Mt. Hood. Most summit parties depart the Salmon River (Climber's) lot between midnight and 3 a.m. to reach the summit on hard morning snow before afternoon warming softens the upper slopes and increases hazard."
+          data-img="images/IMG_2113_TLPk_35.jpeg"
+        ></div>
+        <!-- Legend attached to image bottom -->
+        <div class="legend">
+          <div class="legend-item">
+            <div class="legend-line" style="background: var(--red)"></div>
+            South Side
+          </div>
+          <div class="legend-item">
+            <div class="legend-line" style="background: var(--orange)"></div>
+            West Crater
+          </div>
+          <div class="legend-item">
+            <div class="legend-line" style="background: var(--green)"></div>
+            Wy'east
+          </div>
+          <div class="legend-item">
+            <div class="legend-line" style="background: var(--pink)"></div>
+            West Side
+          </div>
+        </div>
+      </div>
+      <!-- .map-inner -->
+      <div class="hoverbox-panel" id="hoverboxPanel1">
+        <div class="panel-default" id="panelDefault1">
+          <div class="panel-default-label">South Side Approaches</div>
+          <div class="panel-default-title">Exploring the Routes</div>
+          <div class="panel-default-divider"></div>
+          <div class="panel-default-body">
+            Hover over a red dot to explore key waypoints along Mt. Hood's
+            southern approaches — from Timberline Lodge to the summit ridge.
+            Each location includes elevation data, route context, and a
+            photograph from the mountain.
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- .map-wrap -->
+
+    <div class="map-wrap" id="mapWrap2">
+      <div class="map-inner" id="mapInner2">
+        <img
+          id="mapImg"
+          src="images/HdSumm_annot.jpeg"
+          alt="Mt. Hood South Side Routes annotated photo"
+        />
+
+        <!-- Dot 1 · Summit  -->
+        <div
+          class="hotspot"
+          style="left: 52.39%; top: 20%"
+          data-id="1"
+          tabindex="0"
+          data-route="All Routes"
+          data-name="Summit"
+          data-elev="11,249 ft / 3,429 m"
+          data-desc="You've reached the highest point in Oregon. With any luck, you'll see three volcanoes to the north--St. Helens, Adams, and Rainier--and a few to the south--Jefferson and a Sister or two. You might also see nothing but white sky in all directions. You didn't climb for just the view, did you?"
+          data-img="images/IMG_6678_35.jpeg"
+        ></div>
+
+        <!-- Dot 2 · DKHW v2 -->
+        <div
+          class="hotspot"
+          style="left: 71.97%; top: 50.12%"
+          data-id="2"
+          tabindex="0"
+          data-route="Devils Kitchen Headwall"
+          data-name="DK Headwall Variation 2"
+          data-elev="11,100 ft / 3,383 m"
+          data-desc="The second variation of the Devils Kitchen Headwall climbs is less steep than variation one, but still icy and technical--meaning two ice tools, ice screws, and a rope. "
+          data-img="images/IMG_4095.jpeg"
+        ></div>
+
+        <!-- Dot 3 · Pearly Gates -->
+
+        <div
+          class="hotspot"
+          style="left: 56.56%; top: 31.15%"
+          data-id="3"
+          tabindex="0"
+          data-route="South Side Route"
+          data-name="Pearly Gates"
+          data-elev="10,980 ft / 3,347 m"
+          data-desc="Cut right off the Hogsback where it meets the bergschrund and head uphill. You may get a choice between the Left and Right Pearly Gate, or it may be obvious which is more sensible. E
+          ither way, these gullies are funnels for rock and ice chips, so move quickly."
+          data-img="images/IMG_0609.jpeg"
+        ></div>
+
+        <!-- Dot 4 · Hogsback -->
+
+        <div
+          class="hotspot"
+          style="left: 57.55%; top: 57.51%"
+          data-id="4"
+          tabindex="0"
+          data-route="Main Southside Route"
+          data-name="Hogsback"
+          data-elev="11,050 ft / 3,368 m"
+          data-desc="Though it changes from year to year, the low spot of this lovely geometric arc of this wind-sculpted feature is always a welcome sight: a lovely perch before the grand finale, the final push to the summit. The arc steepens as it rises, but is abruptly sliced by a deep bergschrund just before the towers."
+          data-img="images/IMG_0085.jpeg"
+        ></div>
+
+        <!-- Dot 5 · Devils Kitchen -->
+        <div
+          class="hotspot"
+          style="left: 80.29%; top: 85%"
+          data-id="5"
+          tabindex="0"
+          data-route="South Side Route"
+          data-name="Devils Kitchen"
+          data-elev="10,700 ft / 3,261 m"
+          data-desc="After four hours of cimbing ever steeper snow slopes, the abrupt level ground of Devils Kitchen is a welcome sight. But the stench of sulfurous fumes rising from huge fumaroles is a reminder this is dangerous ground. Follow boot tracks or probe for holes."
+          data-img="images/IMG_9403.jpeg"
+        ></div>
+
+        <!-- Dot 6 · Wy'east Ramp -->
+
+        <div
+          class="hotspot"
+          style="left: 67.72%; top: 29.39%"
+          data-id="6"
+          tabindex="0"
+          data-route="Upper Wy'east"
+          data-name="Wy'east Finish"
+          data-elev="10,400 ft / 3,170 m"
+          data-desc="Above the crux section, the last section of the Wy'east route ."
+          data-img=""
+        ></div>
+
+        <!-- Dot 7 · Wy'east Crux -->
+        <div
+          class="hotspot"
+          style="left: 71.18%; top: 36.35%"
+          data-id="7"
+          tabindex="0"
+          data-route="Wy'east Route"
+          data-name="Wy'east Crux"
+          data-elev="9,700 ft / 2,957 m"
+          data-desc="The trickiest part of the upper Wy'east Route, and that includes Devil's Kitchen Headwall variations 2 and 3, is an exposed traverse on uncertain terrain. Sometimes it's solid snow, other times it's crumbly rock. Or ice. Or fluffy sugar snow. It can turn back teams just 100 feet from the summit. "
+          data-img="images/IMG_7101.jpeg"
+        ></div>
+
+        <!-- Dot 8 · West Summit Ridge -->
+        <div
+          class="hotspot"
+          style="left: 40.18%; top: 23.1%"
+          data-id="8"
+          tabindex="0"
+          data-route="West Side Routes"
+          data-name="West Rim Summit Ridge"
+          data-elev="9,600 ft / 2,926 m"
+          data-desc="Triangle Moraine becomes apparent where it tops out in a flat spot along the ridge halfway between the Palmer lift and Devil's Kitchen.   base of the volcanic rock band known as Steel Cliffs. The route steepens significantly above the top of the Palmer chairlift, funneling climbers between cliff bands. Crampon use becomes necessary on firm morning snow. Both the orange West Crater Rim and the main route navigate through gaps in the cliffs above."
+          data-img="images/IMG_2589.jpeg"
+        ></div>
+
+        <!-- Dot 9 · DKHW Crux  -->
+        <div
+          class="hotspot"
+          style="left: 65.85%; top: 39.48%"
+          data-id="9"
+          tabindex="0"
+          data-route="Devils Kitchen Headwall"
+          data-name="DK Headwall Variation 1 Crux"
+          data-elev="8,900 ft / 2,713 m"
+          data-desc="Traversing from Palmer rightward into the White River canyon takes you onto a dying glacier with several large crevasses. Continue up to the East Crater Rim and Newton-Clark routes."
+          data-img="images/IMG_9290.jpeg"
+        ></div>
+
+        <!-- Dot 10 · Old Chute 2-->
+        <div
+          class="hotspot"
+          style="left: 42.88%; top: 35.73%"
+          data-id="10"
+          tabindex="0"
+          data-route="Main Southside Route"
+          data-name="Old Chute"
+          data-elev="8,540 ft / 2,603 m"
+          data-desc="The most popular path to the summit ridge, the Old Chute can be a romp in soft snow or a difficult ascent when icy. It can be downright crowded on nice spring days. Either way, it steepens toward the ridge and can scare many beginners with its huge exposure."
+          data-img="images/IMG_0099.jpeg"
+        ></div>
+
+        <!-- Dot 11 · WCR Hot Rocks  -->
+        <div
+          class="hotspot"
+          style="left: 46.12%; top: 76.53%"
+          data-id="11"
+          tabindex="0"
+          data-route="West Crater Rim"
+          data-name="Hot Rocks"
+          data-elev="9,300 ft / 2,835 m"
+          data-desc="The deserted west side of Crater Rock includes steaming, sandy mud, kept snow-free by volcanic warmth."
+          data-img="images/IMG_6669.jpeg"
+        ></div>
+
+        <!-- Dot 12 · DKHW V3 -->
+
+        <div
+          class="hotspot"
+          style="left: 80.99%; top: 51.51%"
+          data-id="12"
+          tabindex="0"
+          data-route="Flying Buttress (DK V3)"
+          data-name="Flying Buttress"
+          data-elev="7,800 ft / 2,377 m"
+          data-desc="To the far right along the Devils Kitchen headwall a wide gully gives a fairly low-angle path to the East Crater Rim. A small bergschrund guards the entrance in springtime, and the gully can become clogged with rime in winter."
+          data-img="images/IMG_0693.jpeg"
+        ></div>
+
+        <!-- Dot 13 ·WCR Slope -->
+
+        <div
+          class="hotspot"
+          style="left: 37.78%; top: 45.28%"
+          data-id="13"
+          tabindex="0"
+          data-route="West Crater Rim"
+          data-name="West Crater Chute"
+          data-elev="7,000 ft / 2,134 m"
+          data-desc="The ascent to the West Crater Rim resembles the Old Chute but is steeper and much less popular. It is also more prone to avalanche, so should be climbed only on cold or overcast days, or early before the sun hits the slope."
+          data-img="images/IMG_1806_35.jpeg"
+        ></div>
+
+        <!-- Dot 14 · Queens Chair -->
+        <div
+          class="hotspot"
+          style="left: 14.77%; top: 44.3%"
+          data-id="14"
+          tabindex="0"
+          data-route="Leuthold Couloir"
+          data-name="Queen's Chair"
+          data-elev="6,200 ft / 1,890 m"
+          data-desc="This saddle on the northwest flank of the mountain tells climbers of the Sunshine, Leuthold Couloir, and Reid Headwall routes that they're past the high exposure areas and can relax a bit. But they're always surprised that the summit is still 700 vertical away. "
+          data-img="images/IMG_2950.jpeg"
+        ></div>
+
+        <!-- Dot 15 · Leuthold Hourglass -->
+        <div
+          class="hotspot"
+          style="left: 5.7%; top: 90.8%"
+          data-id="15"
+          tabindex="0"
+          data-route="Leuthold Couloir"
+          data-name="The Hourglass"
+          data-elev="5,970 ft / 1,820 m"
+          data-desc="Leuthold Couloir extends from 9,000 feet on the Reid Glacier to 10,600 at the Queens Chair. But the trip through the narrow Hourglass is memorable as the steepest section, and because the stream of ice chips falling from the upper mountain are funneled into the constriction. Move quickly, wear eye protection, and expect some bruises."
+          data-img="images/IMG_7272.jpeg"
+        ></div>
+        <!-- Legend attached to image bottom -->
+        <div class="legend">
+          <div class="legend-item">
+            <div class="legend-line" style="background: var(--red)"></div>
+            South Side
+          </div>
+          <div class="legend-item">
+            <div class="legend-line" style="background: var(--orange)"></div>
+            West Crater
+          </div>
+          <div class="legend-item">
+            <div class="legend-line" style="background: var(--green)"></div>
+            Wy'east
+          </div>
+          <div class="legend-item">
+            <div class="legend-line" style="background: var(--pink)"></div>
+            West Side
+          </div>
+        </div>
+      </div>
+      <!-- .map-inner -->
+      <div class="hoverbox-panel" id="hoverboxPanel2">
+        <div class="panel-default" id="panelDefault2">
+          <div class="panel-default-label">Summit Zone</div>
+          <div class="panel-default-title">Upper Mountain Detail</div>
+          <div class="panel-default-divider"></div>
+          <div class="panel-default-body">
+            This close-up view of the summit block shows the technical upper
+            routes — West Crater Rim, Devil's Kitchen Headwall variations,
+            Wy'east Ridge, and the Flying Buttress. Hover the dots to examine
+            the crux sections and variations above 9,000 feet.
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- .map-wrap -->
+
+    <footer>
+      Mt. Hood, Oregon &nbsp;·&nbsp; 11,249 ft &nbsp;·&nbsp; South Side Routes
+      Routes
+    </footer>
+
+    <script>
+      // Hamburger nav toggle
+      const hamburger = document.getElementById("hamburger");
+      const navMenu = document.getElementById("navMenu");
+      hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("open");
+        navMenu.classList.toggle("open");
+      });
+      navMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          hamburger.classList.remove("open");
+          navMenu.classList.remove("open");
+        });
+      });
+    </script>
+
+    <script>
+      (function () {
+        // Create a hoverbox element
+        function makeHoverbox() {
+          const hb = document.createElement("div");
+          hb.className = "hoverbox";
+          hb.setAttribute("role", "tooltip");
+          hb.setAttribute("aria-live", "polite");
+          hb.innerHTML = `
+            <div class="hb-img-wrap"></div>
+            <div class="hoverbox-body">
+              <div class="hoverbox-route hb-route"></div>
+              <div class="hoverbox-name hb-name"></div>
+              <div class="hoverbox-elev hb-elev"></div>
+              <div class="hoverbox-divider"></div>
+              <div class="hoverbox-desc hb-desc"></div>
+            </div>`;
+          return hb;
+        }
+
+        const isDesktop = () => window.innerWidth >= 900;
+
+        function initMap(mapInner, panel, defaultBox) {
+          const hoverbox = makeHoverbox();
+          let activeHotspot = null;
+          let hideTimer = null;
+
+          function populateHoverbox(dot) {
+            hoverbox.querySelector(".hb-route").textContent = dot.dataset.route;
+            hoverbox.querySelector(".hb-name").textContent = dot.dataset.name;
+            hoverbox.querySelector(".hb-elev").textContent = dot.dataset.elev;
+            hoverbox.querySelector(".hb-desc").textContent = dot.dataset.desc;
+
+            const imgWrap = hoverbox.querySelector(".hb-img-wrap");
+            imgWrap.innerHTML = "";
+            if (dot.dataset.img) {
+              const img = document.createElement("img");
+              img.src = dot.dataset.img;
+              img.alt = dot.dataset.name;
+              img.className = "hoverbox-img";
+              imgWrap.appendChild(img);
+            } else {
+              imgWrap.innerHTML = `<div class="hoverbox-img-placeholder">Photo coming soon</div>`;
+            }
+          }
+
+          function showHoverbox(dot) {
+            clearTimeout(hideTimer);
+            populateHoverbox(dot);
+
+            // Hide the default box
+            if (defaultBox) defaultBox.classList.add("hidden");
+
+            if (isDesktop()) {
+              // Desktop: place hoverbox in the panel sidebar
+              if (hoverbox.parentElement !== panel) {
+                panel.appendChild(hoverbox);
+              }
+              hoverbox.style.left = "";
+              hoverbox.style.top = "";
+            } else {
+              // Mobile: absolute overlay on mapInner
+              if (hoverbox.parentElement !== mapInner) {
+                mapInner.appendChild(hoverbox);
+              }
+
+              const mapRect = mapInner.getBoundingClientRect();
+              const dotRect = dot.getBoundingClientRect();
+              const hbW = 600;
+              const hbH = 600;
+
+              const dotLeft = dotRect.left - mapRect.left + dotRect.width / 2;
+              const dotTop = dotRect.top - mapRect.top + dotRect.height / 2;
+
+              let left, top;
+              const spaceRight = mapRect.width - dotLeft;
+              const spaceLeft = dotLeft;
+
+              if (spaceRight >= hbW + 20) {
+                left = dotLeft + 14;
+              } else if (spaceLeft >= hbW + 20) {
+                left = dotLeft - hbW - 14;
+              } else {
+                left = Math.max(
+                  4,
+                  Math.min(dotLeft - hbW / 2, mapRect.width - hbW - 4),
+                );
+              }
+
+              const spaceBelow = mapRect.height - dotTop;
+              if (spaceBelow >= hbH + 20) {
+                top = dotTop + 14;
+              } else {
+                top = Math.max(4, dotTop - hbH - 14);
+              }
+
+              hoverbox.style.left = left + "px";
+              hoverbox.style.top = top + "px";
+            }
+
+            hoverbox.classList.add("visible");
+            activeHotspot = dot;
+          }
+
+          function hideHoverbox() {
+            hideTimer = setTimeout(() => {
+              hoverbox.classList.remove("visible");
+              activeHotspot = null;
+              // Restore the default box
+              if (defaultBox) defaultBox.classList.remove("hidden");
+            }, 120);
+          }
+
+          hoverbox.addEventListener("mouseenter", () =>
+            clearTimeout(hideTimer),
+          );
+          hoverbox.addEventListener("mouseleave", hideHoverbox);
+
+          mapInner.querySelectorAll(".hotspot").forEach((dot) => {
+            dot.addEventListener("mouseenter", () => showHoverbox(dot));
+            dot.addEventListener("mouseleave", hideHoverbox);
+            dot.addEventListener("focus", () => showHoverbox(dot));
+            dot.addEventListener("blur", hideHoverbox);
+            dot.addEventListener("click", (e) => {
+              e.stopPropagation();
+              if (
+                activeHotspot === dot &&
+                hoverbox.classList.contains("visible")
+              ) {
+                hideHoverbox();
+              } else {
+                showHoverbox(dot);
+              }
+            });
+          });
+
+          document.addEventListener("click", () => {
+            hoverbox.classList.remove("visible");
+            activeHotspot = null;
+            if (defaultBox) defaultBox.classList.remove("hidden");
+          });
+        }
+
+        // Initialize both maps
+        const mapInner1 = document.getElementById("mapInner");
+        const panel1 = document.getElementById("hoverboxPanel1");
+        const default1 = document.getElementById("panelDefault1");
+        if (mapInner1 && panel1) initMap(mapInner1, panel1, default1);
+
+        const mapInner2 = document.getElementById("mapInner2");
+        const panel2 = document.getElementById("hoverboxPanel2");
+        const default2 = document.getElementById("panelDefault2");
+        if (mapInner2 && panel2) initMap(mapInner2, panel2, default2);
+      })();
+    </script>
+  </body>
+</html>

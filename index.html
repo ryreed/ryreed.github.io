@@ -1,218 +1,376 @@
 <!doctype html>
-<!--
-	Strongly Typed by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
+<html lang="en">
   <head>
-    <title>Ryan Reed | Portfolio</title>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, user-scalable=no"
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ryan Reed - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Oswald:wght@400;500&family=Lora:ital,wght@0,400;1,400&display=swap"
+      rel="stylesheet"
     />
-    <link rel="stylesheet" href="assets/css/main.css" />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --white: #ffffff;
+        --mid-gray: #888;
+        --dark: #222;
+        --salmon: #c8614a;
+        --menu-bg: #888888;
+      }
+
+      body {
+        background: var(--white);
+        color: var(--dark);
+        font-family: "Lora", Georgia, serif;
+        min-height: 100vh;
+      }
+
+      /* ── HEADER ── */
+      header {
+        background: var(--white);
+        padding: 1.5rem 2rem 0;
+      }
+
+      .header-top {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        padding-bottom: 0.4rem;
+      }
+
+      .hamburger-wrap {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0;
+      }
+      .bars {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .bars span {
+        display: block;
+        width: 26px;
+        height: 2.5px;
+        background: var(--dark);
+        transition: all 0.3s ease;
+        transform-origin: center;
+      }
+      .hamburger-wrap.open .bars span:nth-child(1) {
+        transform: translateY(7.5px) rotate(45deg);
+      }
+      .hamburger-wrap.open .bars span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger-wrap.open .bars span:nth-child(3) {
+        transform: translateY(-7.5px) rotate(-45deg);
+      }
+
+      .menu-label {
+        font-family: "Oswald", sans-serif;
+        font-size: 0.85rem;
+        font-weight: 400;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--dark);
+      }
+
+      h1 {
+        font-family: "Alfa Slab One", serif;
+        font-size: clamp(2rem, 7vw, 3.5rem);
+        font-weight: 200;
+        color: var(--salmon);
+        letter-spacing: 0.1em;
+        text-align: center;
+        line-height: 1.1;
+      }
+
+      .tagline {
+        text-align: center;
+        font-family: "Oswald", sans-serif;
+        font-size: 1.12rem;
+        font-weight: 400;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--mid-gray);
+        padding: 0.8rem 0 1.2rem;
+      }
+
+      .header-rule {
+        border: none;
+        border-top: 1px solid #ddd;
+      }
+
+      /* ── DROPDOWN NAV ── */
+      .nav-menu {
+        background: var(--menu-bg);
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.35s ease;
+      }
+      .nav-menu.open {
+        max-height: 56px;
+      }
+
+      .nav-menu-inner {
+        display: flex;
+        align-items: center;
+        padding: 0 2rem;
+        height: 52px;
+      }
+      .nav-menu a {
+        font-family: "Oswald", sans-serif;
+        font-size: 0.78rem;
+        font-weight: 400;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #fff;
+        text-decoration: none;
+        padding: 0 1.4rem;
+        height: 52px;
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        transition: background 0.2s;
+      }
+      .nav-menu a:hover {
+        background: rgba(0, 0, 0, 0.15);
+      }
+
+      /* Mobile stacked */
+      @media (max-width: 680px) {
+        .nav-menu.open {
+          max-height: 220px;
+        }
+        .nav-menu-inner {
+          flex-direction: column;
+          height: auto;
+          padding: 0;
+        }
+        .nav-menu a {
+          width: 100%;
+          padding: 0 2rem;
+          height: 50px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+      }
+
+      /* ── MAIN ── */
+      main {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 3rem 2rem 5rem;
+      }
+
+      .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+      }
+
+      .card a {
+        display: block;
+        text-decoration: none;
+      }
+
+      .card-img {
+        width: 110%;
+        margin-left: -5%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        display: block;
+        border: 5px solid #d4d2d2;
+      }
+
+      /* Placeholder when no real image */
+      .card-placeholder {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .card-title {
+        font-family: "Oswald", sans-serif;
+        font-size: 1rem;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        text-align: center;
+        color: var(--dark);
+        margin: 1.3rem 0 0.85rem;
+        line-height: 1.5;
+      }
+
+      .card-body {
+        font-family: "Lora", serif;
+        font-size: 0.875rem;
+        line-height: 1.8;
+        color: #444;
+        text-align: center;
+      }
+
+      /* Responsive */
+      @media (max-width: 900px) {
+        .portfolio-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 520px) {
+        .portfolio-grid {
+          grid-template-columns: 1fr;
+        }
+        h1 {
+          font-size: 2.4rem;
+        }
+      }
+    </style>
   </head>
-  <body class="homepage is-preload">
-    <div id="page-wrapper">
-      <!-- Header -->
-      <section id="header">
-        <div class="container">
-          <!-- Logo -->
-          <h1 id="logo"><a href="index.html">Ryan Reed</a></h1>
-          <p>Writer. Tech Writer. Climber.</p>
+  <body>
+    <!-- HEADER -->
+    <header>
+      <div class="header-top">
+        <button
+          class="hamburger-wrap"
+          id="hamburger"
+          aria-label="Toggle navigation menu"
+        >
+          <div class="bars"><span></span><span></span><span></span></div>
+          <span class="menu-label">Menu</span>
+        </button>
+        <h1>RYAN REED</h1>
+      </div>
+      <p class="tagline">
+        Writer.&nbsp;&nbsp;&nbsp;Tech Writer.&nbsp;&nbsp;&nbsp;Climber.
+      </p>
+      <hr class="header-rule" />
+    </header>
+
+    <!-- DROPDOWN NAV -->
+    <nav class="nav-menu" id="navMenu" aria-label="Main navigation">
+      <div class="nav-menu-inner">
+        <a href="#">Editorial Work</a>
+        <a href="#">Tech Writing</a>
+        <a href="#">Mt. Hood Demo Site</a>
+        <a href="#">Climbing Blog</a>
+      </div>
+    </nav>
+
+    <!-- PORTFOLIO -->
+    <main>
+      <div class="portfolio-grid">
+        <!-- Card 1 -->
+        <div class="card">
+          <a href="https://www.clippings.me/ryanrreed">
+            <img
+              class="card-img"
+              src="images/Case_660sq.jpg"
+              alt="Editorial Portfolio"
+            />
+          </a>
+          <h2 class="card-title">Editorial Portfolio</h2>
+          <p class="card-body">
+            Over the years I've written about 40 feature stories, and dozens of
+            shorter pieces, published in a range of trade magazines. Most have
+            explored topics in housing development, construction processes,
+            building design, and infrastrucure planning for audiences of
+            developers, contractors, architects, and planners. More recent
+            articles have focused on climbing and mountaineering.
+          </p>
         </div>
-      </section>
 
-      <!-- Features -->
-      <section id="features">
-        <div class="container">
-          <div class="row aln-center">
-            <div class="col-3 col-6-medium col-12-small">
-              <!-- Feature -->
-              <section>
-                <a
-                  href="https://www.clippings.me/ryanrreed"
-                  class="image featured"
-                  ><img
-                    src="images/Case_660sq.jpg"
-                    alt="Housing development plan"
-                /></a>
-                <header>
-                  <a href="https://www.clippings.me/ryanrreed">
-                    <h3>Editorial Portfolio</h3>
-                  </a>
-                </header>
-                <p>
-                  Over the years I've written about 40 feature stories, and
-                  dozens of shorter pieces, published in a range of trade
-                  magazines. Most have explored topics in housing development,
-                  construction processes, building design, and infrastrucure
-                  planning for audiences of developers, contractors, architects,
-                  and planners. More recent articles have focused on climbing
-                  and mountaineering.
-                </p>
-              </section>
-            </div>
-            <div class="col-3 col-6-medium col-12-small">
-              <!-- Feature -->
-              <section>
-                <a
-                  href="https://ryanreed.journoportfolio.com/"
-                  class="image featured"
-                  ><img src="images/Decphr_EditRec580.jpg" alt=""
-                /></a>
-                <header>
-                  <a href="https://ryanreed.journoportfolio.com/">
-                    <h3>Technical Writing Portfolio</h3>
-                  </a>
-                </header>
-                <p>
-                  A small sample from a 15-year careeer developing online help
-                  systems, user guides, quick start guides, documentation, SOPs,
-                  training materials, and client/customer and internal
-                  communications. Not to mention product launch materials,
-                  release updates, technical advisories, incident messaging,
-                  root cause analyses, and knowledge articles.
-                </p>
-              </section>
-            </div>
-            <div class="col-3 col-6-medium col-12-small">
-              <!-- Feature -->
-              <section>
-                <a href="./Hood/HoodSouthSide.html" class="image featured"
-                  ><img
-                    src="images/HdSumm_625.jpeg"
-                    alt="Mt. Hood with route annotations"
-                /></a>
-                <header>
-                  <a href="./Hood/HoodSouthSide.html">
-                    <h3>Mt. Hood for Armchair Climbers</h3>
-                  </a>
-                </header>
-                <p>
-                  Anyone who lives in Portland, and many of those who visit on a
-                  clear day, imagine what it would be like to climb the white
-                  citadel we call Mt. Hood. If you can imagine the frigid temps,
-                  your sleepless brain, and the exhaustion of climbing 5,000
-                  feet at a high altitude, this site will help you with the
-                  visuals. Except as noted, all photos are my own.
-                </p>
-              </section>
-            </div>
-
-            <div class="col-3 col-6-medium col-12-small">
-              <!-- Feature -->
-              <section>
-                <a href="#" class="image featured"
-                  ><img src="images/RR_Baker4.JPG" alt=""
-                /></a>
-                <header>
-                  <h3>My Questionable Hobby</h3>
-                </header>
-                <p>
-                  I organize and lead climbs of mountains, cliffs, ice flows,
-                  and crumbling volcanoes throughout the Pacific Northwest. Just
-                  don't ask why.
-                </p>
-              </section>
-            </div>
-          </div>
+        <!-- Card 2 -->
+        <div class="card">
+          <a href="https://ryanreed.journoportfolio.com/">
+            <img
+              class="card-img"
+              src="images/Decphr_EditRec580.jpg"
+              alt="Technical Writing Portfolio"
+            />
+          </a>
+          <h2 class="card-title">Technical Writing<br />Portfolio</h2>
+          <p class="card-body">
+            A small sample from a 15-year careeer developing online help
+            systems, user guides, quick start guides, documentation, SOPs,
+            training materials, and client/customer and internal communications.
+            Not to mention product launch materials, release updates, technical
+            advisories, incident messaging, root cause analyses, and knowledge
+            articles.
+          </p>
         </div>
-      </section>
 
-      <!-- Footer -->
-
-      <section id="footer">
-        <!--
-        <div class="container">
-          <header>
-            <h2>Questions or comments? <strong>Get in touch:</strong></h2>
-          </header>
-          <div class="row">
-            <div class="col-6 col-12-medium">
-              <section>
-                <form method="post" action="#">
-                  <div class="row gtr-50">
-                    <div class="col-6 col-12-small">
-                      <input name="name" placeholder="Name" type="text" />
-                    </div>
-                    <div class="col-6 col-12-small">
-                      <input name="email" placeholder="Email" type="text" />
-                    </div>
-                    <div class="col-12">
-                      <textarea name="message" placeholder="Message"></textarea>
-                    </div>
-                    <div class="col-12">
-                      <a
-                        href="#"
-                        class="form-button-submit button icon solid fa-envelope"
-                        >Send Message</a
-                      >
-                    </div>
-                  </div>
-                </form>
-              </section>
-            </div>
-            <div class="col-6 col-12-medium">
-              <section>
-                <p>
-                  Erat lorem ipsum veroeros consequat magna tempus lorem ipsum
-                  consequat Phaselamet mollis tortor congue. Sed quis mauris sit
-                  amet magna accumsan tristique. Curabitur leo nibh, rutrum eu
-                  malesuada.
-                </p>
-                <div class="row">
-                  <div class="col-6 col-12-small">
-                    <ul class="icons">
-                      <li class="icon solid fa-home">
-                        Beaverton OR <br />
-                        USA
-                      </li>
-                      <li class="icon solid fa-phone">(000) 000-0000</li>
-                      <li class="icon solid fa-envelope">
-                        <a href="#">rreedcommunications@gmail.com</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="col-6 col-12-small">
-                    <ul class="icons">
-                      <li class="icon brands fa-twitter">
-                        <a href="#">@untitled</a>
-                      </li>
-                      <li class="icon brands fa-instagram">
-                        <a href="#">instagram.com/untitled</a>
-                      </li>
-                      <li class="icon brands fa-dribbble">
-                        <a href="#">dribbble.com/untitled</a>
-                      </li>
-                      <li class="icon brands fa-facebook-f">
-                        <a href="#">facebook.com/untitled</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
+        <!-- Card 3 -->
+        <div class="card">
+          <a href="./Hood/Hoodx2_v5.html">
+            <img
+              class="card-img"
+              src="images/HdSumm_625.jpeg"
+              alt="Mt. Hood for Armchair Climbers"
+            />
+          </a>
+          <h2 class="card-title">Mt. Hood for Armchair<br />Climbers</h2>
+          <p class="card-body">
+            Anyone who lives in Portland, and many of those who visit on a clear
+            day, imagine what it would be like to climb the white citadel we
+            call Mt. Hood. If you can imagine the frigid temps, your sleepless
+            brain, and the exhaustion of climbing 5,000 feet at a high altitude,
+            this site will help you with the visuals. Except as noted, all
+            photos are my own.
+          </p>
         </div>
-        -->
-        <div id="copyright" class="container">
-          <ul class="links">
-            <li>&copy; Ryan Reed. All rights reserved.</li>
-            <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-          </ul>
-        </div>
-      </section>
-    </div>
 
-    <!-- Scripts -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/jquery.dropotron.min.js"></script>
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
+        <!-- Card 4 -->
+        <div class="card">
+          <a href="https://ryanreedpnw.wordpress.com/">
+            <img class="card-img" src="images/RR_Baker4.JPG" alt="My Hobby" />
+          </a>
+          <h2 class="card-title">My Hobby</h2>
+          <p class="card-body">
+            I organize and lead climbs of mountains, cliffs, ice flows, and
+            crumbling volcanoes throughout the Pacific Northwest, mostly with
+            the Mazamas, a Portland-based nonprofit. I also help teach their
+            classes in beginning and intermediate rock climbing and
+            mountaineering, nnd edit the organization's bimonthly publication. I
+            maintain a blog about the most interesting parts of this hobby.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const hamburger = document.getElementById("hamburger");
+      const navMenu = document.getElementById("navMenu");
+
+      hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("open");
+        navMenu.classList.toggle("open");
+      });
+
+      navMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          hamburger.classList.remove("open");
+          navMenu.classList.remove("open");
+        });
+      });
+    </script>
   </body>
 </html>
