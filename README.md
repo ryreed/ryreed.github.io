@@ -1,2 +1,2 @@
 # Github Portfolio
-Moving my Portfolio from journoportfolio to github pages.
+Moving my Portfolio from journoportfolio to GitHub Pages.
